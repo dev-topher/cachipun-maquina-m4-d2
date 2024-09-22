@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es-cl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Cachipún | CRAS-1296</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Juego de Cachipún | CRAS-1296</h1>
+    <button onclick="iniciarJuego()">Comenzar</button>
+    <div id="resultado"></div>
+
+    <script>
+        function generarJugadaComputadora() {
+            const opciones = ["Piedra", "Papel", "Tijera"];
+            const indice = Math.floor(Math.random() * 3);
+            return opciones[indice];
+        }
+
+        function determinarGanador(jugadaUsuario, jugadaComputadora) {
+            if ((jugadaUsuario === "Piedra" && jugadaComputadora === "Tijera") ||
+                (jugadaUsuario === "Papel" && jugadaComputadora === "Piedra") ||
+                (jugadaUsuario === "Tijera" && jugadaComputadora === "Papel")) {
+                return "usuario";
+            } else if ((jugadaComputadora === "Piedra" && jugadaUsuario === "Tijera") ||
+                    (jugadaComputadora === "Papel" && jugadaUsuario === "Piedra") ||
+                    (jugadaComputadora === "Tijera" && jugadaUsuario === "Papel")) {
+                return "computadora";
+            } else {
+                return "empate";
+            }
+        }
+
+        function iniciarJuego() {
+            const veces = prompt("¿Cuántas veces deseas jugar?");
+            let ganadosUsuario = 0;
+            let ganadosComputadora = 0;
+
+            for (let i = 0; i < veces; i++) {
+                const jugadaUsuario = prompt("¿Piedra, Papel o Tijera?");
+                const jugadaComputadora = generarJugadaComputadora();
+
+                const ganador = determinarGanador(jugadaUsuario, jugadaComputadora);
+                if (ganador === "usuario") {
+                    ganadosUsuario++;
+                    alert("¡Ganaste!");
+                } else if (ganador === "computadora") {
+                    ganadosComputadora++;
+                    alert("Perdiste. La computadora ganó.");
+                } else {
+                    alert("¡Empate!");
+                }
+            }
+
+            alert("Resultados:\nGanados por el usuario: " + ganadosUsuario +
+                    "\nGanados por la computadora: " + ganadosComputadora);
+        }
+    </script>
+</body>
+</html>
